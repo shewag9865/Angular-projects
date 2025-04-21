@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Website</title>
+</head>
+<body>
+    <div id="doctors">
+        <div class="head">
+            <h1>Our Doctor's</h1>
+        </div>
+        <div class="doctors">
+            <div class="card">
+                <img src="../assets/p1.png" alt="Dr SriDhar">
+                <p class="doctor-name">Dr SriDhar</p>
+                <p class="specialty">Liver Specialist</p>
+            </div>
+            <div class="card">
+                <img src="../assets/dt2.jpg" alt="Dr Aishwarya">
+                <p class="doctor-name">Dr Aishwarya</p>
+                <p class="specialty">Heart Specialist</p>
+            </div>
+            <div class="card">
+                <img src="../assets/dt3.jpg" alt="Dr Buttler">
+                <p class="doctor-name">Dr Buttler</p>
+                <p class="specialty">Eye Specialist</p>
+            </div>
+        </div>
+    </div>
+    <form [formGroup]="ApplicationForm" (ngSubmit)="onSubmitted()" class="form-container">
+        <h2>Application Form</h2>
+        <p>Please fill the form</p>
+      
+        <div class="form-row">
+          <div class="input-field">
+            <label>First Name*</label>
+            <input type="text" formControlName="firstName" />
+            <div class="error-box" *ngIf="isInvalid('firstName')">Please enter your first name</div>
+          </div>
+      
+          <div class="input-field">
+            <label>Last Name*</label>
+            <input type="text" formControlName="lastName" />
+            <div class="error-box" *ngIf="isInvalid('lastName')">Please enter your last name</div>
+          </div>
+      
+          <div class="input-field">
+            <label>Email*</label>
+            <input type="email" formControlName="email" />
+            <div class="error-box" *ngIf="isInvalid('email')">Please enter a valid email</div>
+          </div>
+      
+          <div class="input-field">
+            <label>Phone*</label>
+            <input type="text" formControlName="phone" />
+            <div class="error-box" *ngIf="isInvalid('phone')">Please enter a valid 10-digit phone number</div>
+          </div>
+      
+          <div class="input-field">
+            <label>city*</label>
+            <input type="text" formControlName="city" />
+            <div class="error-box" *ngIf="isInvalid('city')">Password is required</div>
+          </div>
+      
+          <button type="submit">{{ isEditing ? 'Update' : 'Submit' }}</button>
+        </div>
+      </form>
+      
+      <!-- Data Table -->
+      <div *ngIf="submittedData.length > 0" class="data-table">
+        <h3>Submitted Applications</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>city</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of submittedData; let i = index">
+              <td>{{ data.firstName }}</td>
+              <td>{{ data.lastName }}</td>
+              <td>{{ data.email }}</td>
+              <td>{{ data.phone }}</td>
+              <td>{{ data.city }}</td>
+              <td>
+                <button (click)="onEdit(i)">Edit</button>
+                <button (click)="onDelete(i)">Delete</button>
+                <button (click)="onAdd(i)">Add</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <!-- Export Button -->
+      <div *ngIf="submittedData.length > 0">
+        <button (click)="onExport()">Export as JSON</button>
+      </div>
+      
+</body>
+</html>
+

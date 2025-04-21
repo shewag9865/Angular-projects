@@ -1,0 +1,19 @@
+<nav>
+    <div class="logo">
+      <h1>Abc Hospital</h1>
+    </div>
+  
+    <!-- Toggle icon for mobile -->
+    <div class="menu-toggle" (click)="toggleSidebar()">☰</div>
+  
+    <!-- Nav Links -->
+    <ul [class.active]="sidebarOpen">
+      <li><a routerLink="/home" (click)="closeSidebar()">Home</a></li>
+      <li><a routerLink="/doctor" (click)="closeSidebar()">Doctor</a></li>
+      <li><a routerLink="/login" (click)="closeSidebar()">Login</a></li>
+      <li><a routerLink="/appointment" (click)="closeSidebar()">Appointment</a></li>
+    </ul>
+  </nav>
+  
+  <router-outlet></router-outlet>
+  
